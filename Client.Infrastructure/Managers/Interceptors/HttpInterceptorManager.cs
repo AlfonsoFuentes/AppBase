@@ -1,9 +1,4 @@
-﻿using Client.Infrastructure.Interfaces;
-using Client.Infrastructure.Managers.Identity.Authentication;
-using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
-using Radzen;
-using Toolbelt.Blazor;
+﻿
 
 namespace Client.Infrastructure.Managers.Interceptors
 {
@@ -41,14 +36,14 @@ namespace Client.Infrastructure.Managers.Interceptors
                     var token = await _authenticationManager.TryRefreshToken();
                     if (!string.IsNullOrEmpty(token))
                     {
-                        await _snackBar.Add(_localizer["Refreshed Token."], NotificationSeverity.Success);
+                         _snackBar.Add(_localizer["Refreshed Token."], Severity.Error);
                         e.Request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
                     }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                   await _snackBar.Add(_localizer["You are Logged Out."], NotificationSeverity.Error);
+                    _snackBar.Add(_localizer["You are Logged Out."], Severity.Error);
                     await _authenticationManager.Logout();
                     _navigationManager.NavigateTo("/");
                 }

@@ -1,4 +1,5 @@
 ﻿using Client.Infrastructure.Settings;
+using MudBlazor;
 using Shared.Interfaces.Settings;
 
 namespace Client.Infrastructure.Managers.Preferences
@@ -80,6 +81,15 @@ namespace Client.Infrastructure.Managers.Preferences
         public async Task SetPreference(IPreference preference)
         {
             await _localStorageService.SetItemAsync(StorageConstants.Local.Preference, preference as ClientPreference);
+        }
+        public async Task<MudTheme> GetCurrentThemeAsync()
+        {
+            var preference = await GetPreference() as ClientPreference;
+            if (preference != null)
+            {
+                if (preference.IsDarkMode == true) return BlazorHeroTheme.DarkTheme;
+            }
+            return BlazorHeroTheme.DefaultTheme;
         }
     }
 }

@@ -1,20 +1,9 @@
-﻿using Blazored.LocalStorage;
-using Client.Infrastructure.Authentication;
-using Client.Infrastructure.Managers;
-using Client.Infrastructure.Managers.Preferences;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Shared.Constants.Permission;
-using System.Globalization;
-using System.Reflection;
-using Toolbelt.Blazor.Extensions.DependencyInjection;
-
+﻿
 namespace Client.Extensions
 {
     public static class WebAssemblyHostBuilderExtensions
     {
-        private const string ClientName = "AppBase.API";
+        private const string ClientName = "API";
 
         public static WebAssemblyHostBuilder AddRootComponents(this WebAssemblyHostBuilder builder)
         {
@@ -36,7 +25,14 @@ namespace Client.Extensions
                     RegisterPermissionClaims(options);
                 })
                 .AddBlazoredLocalStorage()
-                
+                .AddMudServices(configuration =>
+                {
+                    configuration.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+                    configuration.SnackbarConfiguration.HideTransitionDuration = 100;
+                    configuration.SnackbarConfiguration.ShowTransitionDuration = 100;
+                    configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
+                    configuration.SnackbarConfiguration.ShowCloseIcon = false;
+                })
                 .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
                 .AddScoped<ClientPreferenceManager>()
                 .AddScoped<BlazorHeroStateProvider>()

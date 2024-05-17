@@ -1,11 +1,5 @@
-using Client;
-using Client.Extensions;
-using Client.Infrastructure.Managers.Preferences;
 using Client.Infrastructure.Settings;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Shared.Constants.Localization;
-using System.Globalization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder

@@ -17,3 +17,7 @@ global using Shared.Interfaces.Chat;
 global using Shared.Models.ChatHistories;
 global using Microsoft.Extensions.Localization;
 global using AutoMapper;
+global using Client.Infrastructure.Managers.Identity.Authentication;
+global using Microsoft.AspNetCore.Components;
+global using MudBlazor;
+global using Toolbelt.Blazor;
